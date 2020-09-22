@@ -9,7 +9,7 @@ describe('routes', () => {
     expect(response.text).toEqual('DERP');
   });
 
-  it('responds with status code 200 and the request body on /echo with POST', async() => {
+  it('responds with the request body on /echo with POST', async() => {
     const response = await request(app)
       .post('/echo')
       .send({ body: 'Herro pwease' });
@@ -40,5 +40,12 @@ describe('routes', () => {
 
     expect(response.text)
       .toEqual('<h1>blue</h1>');
+  });
+  it('responds with 404 if you dun goofed', async() => {
+    const response = await request(app)
+      .get('/lemonade');
+
+    expect(response.status)
+      .toEqual(404);
   });
 });
